@@ -265,5 +265,6 @@ function AuthenticatedLayout({
 
 export default withAuthenticator(AuthenticatedLayout, {
   components: components,
-  formFields: formFields
+  formFields: formFields,
+  socialProviders: ['google']
 });
