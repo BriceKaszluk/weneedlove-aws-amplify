@@ -1,0 +1,29 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-weneedlove-dev-173901-authRole",
+      "UnauthRoleArn": "arn:aws:iam::661031114750:role/amplify-weneedlove-dev-173901-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::661031114750:role/amplify-weneedlove-dev-173901-authRole",
+      "Region": "eu-north-1",
+      "DeploymentBucketName": "amplify-weneedlove-dev-173901-deployment",
+      "UnauthRoleName": "amplify-weneedlove-dev-173901-unauthRole",
+      "StackName": "amplify-weneedlove-dev-173901",
+      "StackId": "arn:aws:cloudformation:eu-north-1:661031114750:stack/amplify-weneedlove-dev-173901/c86b0d00-9cfa-11ee-bb76-0a09eae1129a",
+      "AmplifyAppId": "d1pkq8y9hxyypw"
+    },
+    "categories": {
+      "api": {
+        "weneedlove": {}
+      },
+      "hosting": {
+        "amplifyhosting": {
+          "appId": "d1pkq8y9hxyypw",
+          "type": "cicd"
+        }
+      },
+      "auth": {
+        "weneedlove4c7e9e20": {}
+      }
+    }
+  }
+}
