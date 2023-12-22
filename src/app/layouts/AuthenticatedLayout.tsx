@@ -12,6 +12,7 @@ import {
   Text,
   Authenticator,
   Image,
+  CheckboxField,
 } from "@aws-amplify/ui-react";
 import "@aws-amplify/ui-react/styles.css";
 import config from "@/amplifyconfiguration.json";
@@ -86,6 +87,26 @@ const components = {
         >
           Create a new account
         </Heading>
+      );
+    },
+    FormFields() {
+      const { validationErrors } = useAuthenticator();
+      return (
+        <>
+          {/* Re-use default `Authenticator.SignUp.FormFields` */}
+          <Authenticator.SignUp.FormFields />
+
+          {/* Append & require Terms & Conditions field to sign up  */}
+          <CheckboxField
+            errorMessage={validationErrors.acknowledgement as string}
+            hasError={!!validationErrors.acknowledgement}
+            name="acknowledgement"
+            label="I agree with the Terms & Conditions"
+            value="yes"
+            color='var(--amplify-components-field-label-color)'
+            isRequired 
+          />
+        </>
       );
     },
     Footer() {
@@ -194,14 +215,24 @@ const formFields = {
     },
   },
   signUp: {
-    password: {
-      label: "Password:",
-      placeholder: "Enter your Password:",
-      isRequired: false,
+    email: {
+      placeholder: "Enter your email",
       order: 2,
     },
+    password: {
+      label: "Password:",
+      placeholder: "Enter your Password",
+      isRequired: true,
+      order: 3,
+    },
     confirm_password: {
-      label: "Confirm Password:",
+      label: "Confirm Password",
+      isRequired: true,
+      order: 4,
+    },
+    nickname: {
+      label: "Pseudo",
+      isRequired: true,
       order: 1,
     },
   },
@@ -250,21 +281,23 @@ function AuthenticatedLayout({
   signOut,
   user,
 }: WithAuthenticatorProps & { children: React.ReactNode }) {
+
   return (
     <>
-      <Authenticator formFields={formFields} components={components}>
+
         <h1>Hello, {user?.username}</h1>
         <button onClick={signOut}>Sign out</button>
 
         <main>{children}</main>
-      </Authenticator>
       {/* Vous pouvez ajouter un pied de page ou d'autres éléments ici */}
     </>
   );
 }
 
 export default withAuthenticator(AuthenticatedLayout, {
+  loginMechanisms: ["email"],
   components: components,
   formFields: formFields,
-  socialProviders: ['google']
+  socialProviders: ["google"],
+  signUpAttributes:['email', 'nickname', ],
 });

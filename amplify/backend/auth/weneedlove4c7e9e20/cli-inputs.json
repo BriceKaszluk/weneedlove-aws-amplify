@@ -1,8 +1,6 @@
 {
   "version": "1",
   "cognitoConfig": {
-    "identityPoolName": "weneedlove4c7e9e20_identitypool_4c7e9e20",
-    "allowUnauthenticatedIdentities": false,
     "resourceNameTruncated": "weneed4c7e9e20",
     "userPoolName": "weneedlove4c7e9e20_userpool_4c7e9e20",
     "autoVerifiedAttributes": [
@@ -26,17 +24,24 @@
     "userpoolClientGenerateSecret": false,
     "userpoolClientRefreshTokenValidity": 30,
     "userpoolClientWriteAttributes": [
+      "nickname",
+      "picture",
+      "profile",
       "email"
     ],
     "userpoolClientReadAttributes": [
-      "email"
+      "email",
+      "nickname",
+      "picture",
+      "profile",
+      "email_verified"
     ],
     "userpoolClientLambdaRole": "weneed4c7e9e20_userpoolclient_lambda_role",
-    "userpoolClientSetAttributes": false,
+    "userpoolClientSetAttributes": true,
     "sharedId": "4c7e9e20",
     "resourceName": "weneedlove4c7e9e20",
-    "authSelections": "identityPoolAndUserPool",
-    "useDefault": "defaultSocial",
+    "authSelections": "userPoolOnly",
+    "useDefault": "manual",
     "usernameAttributes": [
       "email"
     ],
@@ -59,12 +64,19 @@
     "breakCircularDependency": true,
     "dependsOn": [],
     "hostedUI": true,
-    "hostedUIDomainName": "weneedlove7eefb926-7eefb926",
+    "userPoolGroups": false,
+    "adminQueries": false,
+    "triggers": {},
+    "parentStack": {
+      "Ref": "AWS::StackId"
+    },
+    "permissions": [],
+    "hostedUIDomainName": "weneedlove8ad7e076-8ad7e076",
     "authProvidersUserPool": [
       "Google"
     ],
     "hostedUIProviderMeta": "[{\"ProviderName\":\"Google\",\"authorize_scopes\":\"openid email profile\",\"AttributeMapping\":{\"email\":\"email\",\"username\":\"sub\"}}]",
-    "oAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"phone\",\"email\",\"openid\",\"profile\",\"aws.cognito.signin.user.admin\"],\"CallbackURLs\":[\"https://main.d1pkq8y9hxyypw.amplifyapp.com/tableau-de-bord/\"],\"LogoutURLs\":[\"https://main.d1pkq8y9hxyypw.amplifyapp.com/\",\"https://weneedlove.fr/\"]}",
+    "oAuthMetadata": "{\"AllowedOAuthFlows\":[\"implicit\"],\"AllowedOAuthScopes\":[\"phone\",\"email\",\"openid\",\"profile\",\"aws.cognito.signin.user.admin\"],\"CallbackURLs\":[\"https://main.d1pkq8y9hxyypw.amplifyapp.com/tableau-de-bord/\"],\"LogoutURLs\":[\"https://main.d1pkq8y9hxyypw.amplifyapp.com/\",\"https://weneedlove.fr/\"]}",
     "authProviders": []
   }
 }
