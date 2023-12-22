@@ -27,7 +27,7 @@ const components = {
       <View textAlign="center" padding={tokens.space.large}>
         <Image
           alt="Amplify logo"
-          src="https://docs.amplify.aws/assets/logo-dark.svg"
+          src="/weneedlove-logo.png"
         />
       </View>
     );
