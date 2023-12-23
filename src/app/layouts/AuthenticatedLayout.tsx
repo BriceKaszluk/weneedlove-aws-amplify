@@ -217,23 +217,18 @@ const formFields = {
   signUp: {
     email: {
       placeholder: "Enter your email",
-      order: 2,
+      order: 1,
     },
     password: {
       label: "Password:",
       placeholder: "Enter your Password",
       isRequired: true,
-      order: 3,
+      order: 2,
     },
     confirm_password: {
       label: "Confirm Password",
       isRequired: true,
-      order: 4,
-    },
-    nickname: {
-      label: "Pseudo",
-      isRequired: true,
-      order: 1,
+      order: 3,
     },
   },
   forceNewPassword: {
@@ -284,8 +279,6 @@ function AuthenticatedLayout({
 
   return (
     <>
-
-        <h1>Hello, {user?.username}</h1>
         <button onClick={signOut}>Sign out</button>
 
         <main>{children}</main>
@@ -299,5 +292,5 @@ export default withAuthenticator(AuthenticatedLayout, {
   components: components,
   formFields: formFields,
   socialProviders: ["google"],
-  signUpAttributes:['email', 'nickname', ],
+  signUpAttributes:['email'],
 });
