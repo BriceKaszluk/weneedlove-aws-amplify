@@ -13,6 +13,7 @@ import {
   Authenticator,
   Image,
   CheckboxField,
+  TextField,
 } from "@aws-amplify/ui-react";
 import "@aws-amplify/ui-react/styles.css";
 import config from "@/amplifyconfiguration.json";
@@ -215,20 +216,26 @@ const formFields = {
     },
   },
   signUp: {
+    nickname: {
+      label: "Pseudo:",
+      placeholder: "Entrez votre pseudo",
+      isRequired: true,
+      order: 1,
+    },
     email: {
       placeholder: "Enter your email",
-      order: 1,
+      order: 2,
     },
     password: {
       label: "Password:",
       placeholder: "Enter your Password",
       isRequired: true,
-      order: 2,
+      order: 3,
     },
     confirm_password: {
       label: "Confirm Password",
       isRequired: true,
-      order: 3,
+      order: 4,
     },
   },
   forceNewPassword: {
