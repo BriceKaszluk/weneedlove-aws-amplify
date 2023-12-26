@@ -23,7 +23,7 @@ const initialState: UserAttributes = {
   // Initialiser les autres attributs si nécessaire
 };
 
-export default function profil() {
+export default function Profil() {
   const [initialUserAttributes, setInitialUserAttributes] =
     useState<UserAttributes>(initialState);
   const [userAttributes, setUserAttributes] =
