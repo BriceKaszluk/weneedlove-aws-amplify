@@ -2,18 +2,18 @@
 /* eslint-disable */
 //  This file was automatically generated and should not be edited.
 
-export type CreateTodoInput = {
+export type CreateStoryInput = {
   id?: string | null,
-  name: string,
-  description?: string | null,
+  title: string,
+  content: string,
 };
 
-export type ModelTodoConditionInput = {
-  name?: ModelStringInput | null,
-  description?: ModelStringInput | null,
-  and?: Array< ModelTodoConditionInput | null > | null,
-  or?: Array< ModelTodoConditionInput | null > | null,
-  not?: ModelTodoConditionInput | null,
+export type ModelStoryConditionInput = {
+  title?: ModelStringInput | null,
+  content?: ModelStringInput | null,
+  and?: Array< ModelStoryConditionInput | null > | null,
+  or?: Array< ModelStoryConditionInput | null > | null,
+  not?: ModelStoryConditionInput | null,
 };
 
 export type ModelStringInput = {
@@ -56,32 +56,32 @@ export type ModelSizeInput = {
   between?: Array< number | null > | null,
 };
 
-export type Todo = {
-  __typename: "Todo",
+export type Story = {
+  __typename: "Story",
   id: string,
-  name: string,
-  description?: string | null,
+  title: string,
+  content: string,
   createdAt: string,
   updatedAt: string,
 };
 
-export type UpdateTodoInput = {
+export type UpdateStoryInput = {
   id: string,
-  name?: string | null,
-  description?: string | null,
+  title?: string | null,
+  content?: string | null,
 };
 
-export type DeleteTodoInput = {
+export type DeleteStoryInput = {
   id: string,
 };
 
-export type ModelTodoFilterInput = {
+export type ModelStoryFilterInput = {
   id?: ModelIDInput | null,
-  name?: ModelStringInput | null,
-  description?: ModelStringInput | null,
-  and?: Array< ModelTodoFilterInput | null > | null,
-  or?: Array< ModelTodoFilterInput | null > | null,
-  not?: ModelTodoFilterInput | null,
+  title?: ModelStringInput | null,
+  content?: ModelStringInput | null,
+  and?: Array< ModelStoryFilterInput | null > | null,
+  or?: Array< ModelStoryFilterInput | null > | null,
+  not?: ModelStoryFilterInput | null,
 };
 
 export type ModelIDInput = {
@@ -100,18 +100,18 @@ export type ModelIDInput = {
   size?: ModelSizeInput | null,
 };
 
-export type ModelTodoConnection = {
-  __typename: "ModelTodoConnection",
-  items:  Array<Todo | null >,
+export type ModelStoryConnection = {
+  __typename: "ModelStoryConnection",
+  items:  Array<Story | null >,
   nextToken?: string | null,
 };
 
-export type ModelSubscriptionTodoFilterInput = {
+export type ModelSubscriptionStoryFilterInput = {
   id?: ModelSubscriptionIDInput | null,
-  name?: ModelSubscriptionStringInput | null,
-  description?: ModelSubscriptionStringInput | null,
-  and?: Array< ModelSubscriptionTodoFilterInput | null > | null,
-  or?: Array< ModelSubscriptionTodoFilterInput | null > | null,
+  title?: ModelSubscriptionStringInput | null,
+  content?: ModelSubscriptionStringInput | null,
+  and?: Array< ModelSubscriptionStoryFilterInput | null > | null,
+  or?: Array< ModelSubscriptionStoryFilterInput | null > | null,
 };
 
 export type ModelSubscriptionIDInput = {
@@ -144,83 +144,83 @@ export type ModelSubscriptionStringInput = {
   notIn?: Array< string | null > | null,
 };
 
-export type CreateTodoMutationVariables = {
-  input: CreateTodoInput,
-  condition?: ModelTodoConditionInput | null,
+export type CreateStoryMutationVariables = {
+  input: CreateStoryInput,
+  condition?: ModelStoryConditionInput | null,
 };
 
-export type CreateTodoMutation = {
-  createTodo?:  {
-    __typename: "Todo",
+export type CreateStoryMutation = {
+  createStory?:  {
+    __typename: "Story",
     id: string,
-    name: string,
-    description?: string | null,
+    title: string,
+    content: string,
     createdAt: string,
     updatedAt: string,
   } | null,
 };
 
-export type UpdateTodoMutationVariables = {
-  input: UpdateTodoInput,
-  condition?: ModelTodoConditionInput | null,
+export type UpdateStoryMutationVariables = {
+  input: UpdateStoryInput,
+  condition?: ModelStoryConditionInput | null,
 };
 
-export type UpdateTodoMutation = {
-  updateTodo?:  {
-    __typename: "Todo",
+export type UpdateStoryMutation = {
+  updateStory?:  {
+    __typename: "Story",
     id: string,
-    name: string,
-    description?: string | null,
+    title: string,
+    content: string,
     createdAt: string,
     updatedAt: string,
   } | null,
 };
 
-export type DeleteTodoMutationVariables = {
-  input: DeleteTodoInput,
-  condition?: ModelTodoConditionInput | null,
+export type DeleteStoryMutationVariables = {
+  input: DeleteStoryInput,
+  condition?: ModelStoryConditionInput | null,
 };
 
-export type DeleteTodoMutation = {
-  deleteTodo?:  {
-    __typename: "Todo",
+export type DeleteStoryMutation = {
+  deleteStory?:  {
+    __typename: "Story",
     id: string,
-    name: string,
-    description?: string | null,
+    title: string,
+    content: string,
     createdAt: string,
     updatedAt: string,
   } | null,
 };
 
-export type GetTodoQueryVariables = {
+export type GetStoryQueryVariables = {
   id: string,
 };
 
-export type GetTodoQuery = {
-  getTodo?:  {
-    __typename: "Todo",
+export type GetStoryQuery = {
+  getStory?:  {
+    __typename: "Story",
     id: string,
-    name: string,
-    description?: string | null,
+    title: string,
+    content: string,
     createdAt: string,
     updatedAt: string,
   } | null,
 };
 
-export type ListTodosQueryVariables = {
-  filter?: ModelTodoFilterInput | null,
+export type ListStoriesQueryVariables = {
+  filter?: ModelStoryFilterInput | null,
   limit?: number | null,
   nextToken?: string | null,
 };
 
-export type ListTodosQuery = {
-  listTodos?:  {
-    __typename: "ModelTodoConnection",
+export type ListStoriesQuery = {
+  listStories?:  {
+    __typename: "ModelStoryConnection",
     items:  Array< {
-      __typename: "Todo",
+      __typename: "Story",
       id: string,
-      name: string,
-      description?: string | null,
+      title: string,
+      content: string,
       createdAt: string,
       updatedAt: string,
     } | null >,
@@ -228,46 +228,46 @@ export type ListTodosQuery = {
   } | null,
 };
 
-export type OnCreateTodoSubscriptionVariables = {
-  filter?: ModelSubscriptionTodoFilterInput | null,
+export type OnCreateStorySubscriptionVariables = {
+  filter?: ModelSubscriptionStoryFilterInput | null,
 };
 
-export type OnCreateTodoSubscription = {
-  onCreateTodo?:  {
-    __typename: "Todo",
+export type OnCreateStorySubscription = {
+  onCreateStory?:  {
+    __typename: "Story",
     id: string,
-    name: string,
-    description?: string | null,
+    title: string,
+    content: string,
     createdAt: string,
     updatedAt: string,
   } | null,
 };
 
-export type OnUpdateTodoSubscriptionVariables = {
-  filter?: ModelSubscriptionTodoFilterInput | null,
+export type OnUpdateStorySubscriptionVariables = {
+  filter?: ModelSubscriptionStoryFilterInput | null,
 };
 
-export type OnUpdateTodoSubscription = {
-  onUpdateTodo?:  {
-    __typename: "Todo",
+export type OnUpdateStorySubscription = {
+  onUpdateStory?:  {
+    __typename: "Story",
     id: string,
-    name: string,
-    description?: string | null,
+    title: string,
+    content: string,
     createdAt: string,
     updatedAt: string,
   } | null,
 };
 
-export type OnDeleteTodoSubscriptionVariables = {
-  filter?: ModelSubscriptionTodoFilterInput | null,
+export type OnDeleteStorySubscriptionVariables = {
+  filter?: ModelSubscriptionStoryFilterInput | null,
 };
 
-export type OnDeleteTodoSubscription = {
-  onDeleteTodo?:  {
-    __typename: "Todo",
+export type OnDeleteStorySubscription = {
+  onDeleteStory?:  {
+    __typename: "Story",
     id: string,
-    name: string,
-    description?: string | null,
+    title: string,
+    content: string,
     createdAt: string,
     updatedAt: string,
   } | null,

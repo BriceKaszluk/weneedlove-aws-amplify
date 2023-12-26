@@ -8,54 +8,54 @@ type GeneratedMutation<InputType, OutputType> = string & {
   __generatedMutationOutput: OutputType;
 };
 
-export const createTodo = /* GraphQL */ `mutation CreateTodo(
-  $input: CreateTodoInput!
-  $condition: ModelTodoConditionInput
+export const createStory = /* GraphQL */ `mutation CreateStory(
+  $input: CreateStoryInput!
+  $condition: ModelStoryConditionInput
 ) {
-  createTodo(input: $input, condition: $condition) {
+  createStory(input: $input, condition: $condition) {
     id
-    name
-    description
+    title
+    content
     createdAt
     updatedAt
     __typename
   }
 }
 ` as GeneratedMutation<
-  APITypes.CreateTodoMutationVariables,
-  APITypes.CreateTodoMutation
+  APITypes.CreateStoryMutationVariables,
+  APITypes.CreateStoryMutation
 >;
-export const updateTodo = /* GraphQL */ `mutation UpdateTodo(
-  $input: UpdateTodoInput!
-  $condition: ModelTodoConditionInput
+export const updateStory = /* GraphQL */ `mutation UpdateStory(
+  $input: UpdateStoryInput!
+  $condition: ModelStoryConditionInput
 ) {
-  updateTodo(input: $input, condition: $condition) {
+  updateStory(input: $input, condition: $condition) {
     id
-    name
-    description
+    title
+    content
     createdAt
     updatedAt
     __typename
   }
 }
 ` as GeneratedMutation<
-  APITypes.UpdateTodoMutationVariables,
-  APITypes.UpdateTodoMutation
+  APITypes.UpdateStoryMutationVariables,
+  APITypes.UpdateStoryMutation
 >;
-export const deleteTodo = /* GraphQL */ `mutation DeleteTodo(
-  $input: DeleteTodoInput!
-  $condition: ModelTodoConditionInput
+export const deleteStory = /* GraphQL */ `mutation DeleteStory(
+  $input: DeleteStoryInput!
+  $condition: ModelStoryConditionInput
 ) {
-  deleteTodo(input: $input, condition: $condition) {
+  deleteStory(input: $input, condition: $condition) {
     id
-    name
-    description
+    title
+    content
     createdAt
     updatedAt
     __typename
   }
 }
 ` as GeneratedMutation<
-  APITypes.DeleteTodoMutationVariables,
-  APITypes.DeleteTodoMutation
+  APITypes.DeleteStoryMutationVariables,
+  APITypes.DeleteStoryMutation
 >;

@@ -1,5 +1,4 @@
 import { updateUserAttribute } from "aws-amplify/auth";
-import { deleteUser } from "aws-amplify/auth";
 
 interface UpdateUserAttributeResult {
   success: boolean;
@@ -21,13 +20,5 @@ export async function handleUpdateUserAttribute(
   } catch (error) {
     console.error(error);
     return { success: false, message: "Votre pseudo n'a pas pu être modifié." };
-  }
-}
-
-export async function handleDeleteUser() {
-  try {
-    await deleteUser();
-  } catch (error) {
-    console.log(error);
   }
 }

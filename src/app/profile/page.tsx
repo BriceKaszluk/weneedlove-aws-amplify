@@ -5,7 +5,8 @@ import AuthenticatedLayout from "../layouts/AuthenticatedLayout";
 import { Amplify } from "aws-amplify";
 import config from "@/amplifyconfiguration.json";
 import { TextField, Text, Button, Alert } from "@aws-amplify/ui-react";
-import { handleUpdateUserAttribute, handleDeleteUser } from "./userManager";
+import { handleUpdateUserAttribute } from "./userManager";
+import { AccountSettings } from "@aws-amplify/ui-react";
 
 Amplify.configure(config);
 
@@ -13,14 +14,12 @@ interface UserAttributes {
   email: string;
   email_verified: boolean;
   nickname: string;
-  // Ajoutez ici d'autres attributs attendus
 }
 
 const initialState: UserAttributes = {
   email: "",
   email_verified: false,
   nickname: "",
-  // Initialiser les autres attributs si nécessaire
 };
 
 export default function Profil() {
@@ -30,8 +29,9 @@ export default function Profil() {
     useState<UserAttributes>(initialState);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
-  const [confirmUpdate, setConfirmUpdate] = useState(false);
-  const [tryDeleteAccount, setTryDeleteAccount] = useState(false);
+  const [confirmPseudoUpdate, setconfirmPseudoUpdate] = useState(false);
+  const [confirmPasswordUpdate, setconfirmPasswordUpdate] = useState("");
+  const [showModifyPassword, setShowModifyPassword] = useState(false);
 
   async function handleFetchUserAttributes() {
     setIsLoading(true);
@@ -69,9 +69,8 @@ export default function Profil() {
         "nickname",
         userAttributes.nickname
       );
-      console.log("res", res);
       if (res.success) {
-        setConfirmUpdate(true);
+        setconfirmPseudoUpdate(true);
         handleFetchUserAttributes();
       } else {
         setError("Une erreur est survenue lors de la mise à jour du surnom.");
@@ -154,18 +153,16 @@ export default function Profil() {
       >
         Enregistrer
       </Button>
-      {confirmUpdate && (
-        <Text
-          as="p"
-          lineHeight="1.5em"
-          fontWeight={400}
-          fontSize="1em"
-          fontStyle="normal"
-          textDecoration="none"
-          width="30vw"
+      {confirmPseudoUpdate && (
+        <Alert
+          variation="success"
+          isDismissible={true}
+          hasIcon={true}
+          heading="Confirmation"
+          onDismiss={() => {setconfirmPseudoUpdate(false)}}
         >
           Votre pseudo a bien été modifié
-        </Text>
+        </Alert>
       )}
       {error && (
         <Text
@@ -181,34 +178,29 @@ export default function Profil() {
         </Text>
       )}
       <Button
-        variation="primary"
-        colorTheme="error"
-        loadingText=""
-        onClick={() => setTryDeleteAccount(true)}
+        colorTheme="overlay"
+        type="submit"
+        loadingText="Chargement"
+        onClick={() => setShowModifyPassword(!showModifyPassword)}
       >
-        Supprimer mon compte
+        Modifier mon mot de passe
       </Button>
-      {tryDeleteAccount && (
+      {
+        showModifyPassword && 
+        <AccountSettings.ChangePassword onSuccess={() => {setconfirmPasswordUpdate("success"); setShowModifyPassword(false)}} onError={() => {setconfirmPasswordUpdate("error"); setShowModifyPassword(false)}} />
+      }
+            {confirmPasswordUpdate && (
         <Alert
-          variation="warning"
-          isDismissible={false}
+          variation={confirmPasswordUpdate === "success" ? "success" : "error"}
+          isDismissible={true}
           hasIcon={true}
-          heading="C'est irreversible!"
+          heading={confirmPasswordUpdate === "success" ? "Confirmation" : "Erreur"}
+          onDismiss={() => {setconfirmPasswordUpdate(""); setShowModifyPassword(false)}}
         >
-          Confirmer supprimera votre compte et toutes les données associées
-          <Button
-            variation="primary"
-            colorTheme="error"
-            loadingText=""
-            onClick={() => {
-              setTryDeleteAccount(false);
-              handleDeleteUser();
-            }}
-          >
-            Confirmer la suppression
-          </Button>
+          Votre mot de passe a bien été modifié
         </Alert>
       )}
+      <AccountSettings.DeleteUser />
     </AuthenticatedLayout>
   );
 }
