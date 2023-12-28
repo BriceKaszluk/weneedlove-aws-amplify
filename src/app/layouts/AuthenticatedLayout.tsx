@@ -13,7 +13,6 @@ import {
   Authenticator,
   Image,
   CheckboxField,
-  TextField,
 } from "@aws-amplify/ui-react";
 import "@aws-amplify/ui-react/styles.css";
 import config from "@/amplifyconfiguration.json";

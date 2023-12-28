@@ -1,12 +1,24 @@
-import { generateClient } from 'aws-amplify/api';
+'use server';
+import { generateServerClientUsingCookies } from '@aws-amplify/adapter-nextjs/api';
 import * as mutations from '@/graphql/mutations';
+import { cookies } from 'next/headers';
+import config from '@/amplifyconfiguration.json';
 
-const client = generateClient();
+const client = generateServerClientUsingCookies({
+  config,
+  cookies
+});
 
-export const addStory = async (title: string, content: string) => {
-  const storyDetails = {
-    title,
-    content
+interface StoryFormData {
+  title: string;
+  content: string;
+}
+
+export const addStory = async (formData: FormData) => {
+
+  const storyDetails: StoryFormData  = {
+    title: formData.get('title')?.toString() || "",
+    content: formData.get('content')?.toString() || ""
   };
 
   try {

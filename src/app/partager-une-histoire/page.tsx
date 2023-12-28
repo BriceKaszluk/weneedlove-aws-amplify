@@ -1,21 +1,14 @@
 "use client";
-import { useState } from "react";
-import {
-  TextField,
-  TextAreaField,
-  Text,
-  Button,
-  Alert,
-} from "@aws-amplify/ui-react";
+import { useState, useRef } from "react";
+import { TextField, TextAreaField, Button, Alert } from "@aws-amplify/ui-react";
 import { addStory } from "./graphQueries";
 
 import AuthenticatedLayout from "../layouts/AuthenticatedLayout";
 
 export default function ShareStory() {
-  const [storyTitle, setStoryTitle] = useState("");
-  const [storyContent, setStoryContent] = useState("");
-  const [shareSuccess, setShareSuccess] = useState<boolean | string>();
+  const [shareSuccess, setShareSuccess] = useState<string>();
   const [isLoading, setIsLoading] = useState(false);
+  const formRef = useRef<HTMLFormElement>(null);
 
   let message;
   if (shareSuccess === "success") {
@@ -32,13 +25,10 @@ export default function ShareStory() {
         Ton histoire a bien été partagée
       </Alert>
     );
-  } else if (
-    typeof shareSuccess === "string" &&
-    shareSuccess.startsWith("error:")
-  ) {
+  } else {
     message = (
       <Alert
-        variation="success"
+        variation="error"
         isDismissible={true}
         hasIcon={true}
         heading="Erreur"
@@ -46,55 +36,51 @@ export default function ShareStory() {
           setShareSuccess("");
         }}
       >
-        {shareSuccess.substring(6)}
+        {shareSuccess?.substring(6)}
       </Alert>
     );
   }
 
-  const shareStory = async () => {
+  const shareStory = async (formData: FormData) => {
+    console.log("formData", formData)
     setIsLoading(true);
-    const result = await addStory(storyTitle, storyContent);
+    const result = await addStory(formData);
     setShareSuccess(result);
-    setStoryTitle("");
-    setStoryContent("");
-    setIsLoading(false)
+    setIsLoading(false);
+    formRef.current?.reset();
   };
 
   return (
     <AuthenticatedLayout>
       <h1>Partager une histoire</h1>
-      <TextField
-        descriptiveText="Un titre court pour ton histoire"
-        placeholder="Baggins"
-        label="Last name"
-        errorMessage="There is an error"
-        isDisabled = {isLoading ? true : false}
-        onChange={(e) => {
-          setStoryTitle(e.target.value);
-        }}
-      />
-      <TextAreaField
-        descriptiveText="Rédiges ton histoire ici"
-        label=""
-        name="last_name"
-        placeholder="Baggins"
-        isDisabled = {isLoading ? true : false}
-        rows={3}
-        onChange={(e) => {
-          setStoryContent(e.target.value);
-        }}
-      />
-      {message}
-      <Button
-        variation="primary"
-        colorTheme="success"
-        isDisabled = {isLoading ? true : false}
-        loadingText=""
-        onClick={() => shareStory()}
-      >
-        Partager
-      </Button>
-      
+      <form action={shareStory} ref={formRef}>
+        <TextField
+          descriptiveText="Un titre court pour ton histoire"
+          placeholder="Baggins"
+          label="title"
+          name="title"
+          errorMessage="There is an error"
+          isDisabled={isLoading ? true : false}
+        />
+        <TextAreaField
+          descriptiveText="Rédiges ton histoire ici"
+          label="Ton histoire"
+          name="content"
+          placeholder="Ton histoire"
+          isDisabled={isLoading ? true : false}
+          rows={8}
+        />
+        {shareSuccess && message}
+        <Button
+          variation="primary"
+          colorTheme="success"
+          isDisabled={isLoading ? true : false}
+          loadingText=""
+          type="submit"
+        >
+          Partager
+        </Button>
+      </form>
     </AuthenticatedLayout>
   );
 }

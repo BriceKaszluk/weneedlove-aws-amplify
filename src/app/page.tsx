@@ -18,10 +18,10 @@ const cookiesClient = generateServerClientUsingCookies({
 async function createTodo(formData: FormData) {
   'use server';
   const { data } = await cookiesClient.graphql({
-    query: mutations.createTodo,
+    query: mutations.createStory,
     variables: {
       input: {
-        name: formData.get('name')?.toString() ?? ''
+        title: formData.get('name')?.toString() ?? ''
       }
     }
   });
@@ -34,10 +34,10 @@ async function createTodo(formData: FormData) {
 export default async function Home() {
   // 2. Fetch additional todos
   const { data, errors } = await cookiesClient.graphql({
-    query: queries.listTodos
+    query: queries.listStories
   });
 
-  const todos = data.listTodos.items;
+  const todos = data.listStories.items;
 
   return (
     <div
@@ -63,7 +63,7 @@ export default async function Home() {
       {/* 4. Display todos*/}
       <ul>
         {todos.map((todo, index) => {
-          return <li key={index} style={{ listStyle: 'none' }}>{todo.name}</li>;
+          return <li key={index} style={{ listStyle: 'none' }}>{todo.title}</li>;
         })}
       </ul>
     </div>
